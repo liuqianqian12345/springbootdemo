@@ -2,6 +2,7 @@ package com.longjing.controller;
 
 import com.longjing.pojo.LoginInfo;
 import com.longjing.pojo.ResponseInfo;
+import com.longjing.pojo.UserInfo;
 import com.longjing.service.ApplicationService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
@@ -18,5 +19,11 @@ public class ApplicationController {
     @PostMapping(value = "login")
     public ResponseInfo login(@RequestBody LoginInfo loginInfo) {
         return applicationService.login(loginInfo);
+    }
+
+    @PostMapping(value = "updateUser")
+    public ResponseInfo updateUser(@RequestBody UserInfo userInfo){
+
+        return applicationService.updateUser(userInfo);
     }
 }

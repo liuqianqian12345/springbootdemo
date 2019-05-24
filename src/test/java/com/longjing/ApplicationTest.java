@@ -2,6 +2,7 @@ package com.longjing;
 
 import com.longjing.pojo.LoginInfo;
 import com.longjing.pojo.ResponseInfo;
+import com.longjing.pojo.UserInfo;
 import com.longjing.service.ApplicationService;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -26,5 +27,11 @@ public class ApplicationTest {
         loginInfo.setPassword("123456");
         ResponseInfo  responseInfo=applicationService.login(loginInfo);
         System.out.println(responseInfo.toString());
+    }
+
+    @Test
+    public void updateUser(){
+        UserInfo userInfo=new UserInfo();
+        applicationService.updateUser(userInfo);
     }
 }

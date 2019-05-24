@@ -23,8 +23,9 @@
 ">
 
 
-    <!--<context:component-scan base-package="com.telchina.traffic"></context:component-scan>-->
     <context:component-scan base-package="com.longjing"></context:component-scan>
+    <context:property-placeholder location="classpath*:redis.properties" />
+
     <!-- entity manager -->
     <bean id="entityManagerFactory"
           class="org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean">
@@ -74,12 +75,26 @@
         <property name="timeBetweenEvictionRunsMillis" value="60000" />
 
         <!-- 配置一个连接在池中最小生存的时间，单位是毫秒 -->
-        <property name="minEvictableIdleTimeMillis" value="3" />
+        <property name="minEvictableIdleTimeMillis" value="30000" />
 
         <!-- 配置监控统计拦截的filters -->
         <property name="filters" value="stat" />
     </bean>
 
+    <bean id="connectionFactory"
+          class="org.springframework.data.redis.connection.jedis.JedisConnectionFactory">
+        <property name="poolConfig" ref="jedisPoolConfig" />
+        <property name="port" value="${redis.port}" />
+        <property name="hostName" value="${redis.host}" />
+        <property name="password" value="${redis.password}" />
+        <property name="timeout" value="${redis.timeout}"></property>
+    </bean>
+    <bean class="redis.clients.jedis.JedisPoolConfig" id="jedisPoolConfig">
+        <property name="maxIdle" value="${redis.maxIdle}" />
+        <property name="maxTotal" value="${redis.maxActive}" />
+        <property name="maxWaitMillis" value="${redis.maxWaitMillis}" />
+        <property name="testOnBorrow" value="${redis.testOnBorrow}" />
+    </bean>
 
     <!-- JPA Vendor - Hibernate -->
     <bean id="hibernateJpaVendorAdapter"
@@ -95,5 +110,4 @@
             entity-manager-factory-ref="entityManagerFactory"
             transaction-manager-ref="transactionManager"
             base-package="com.longjing.repo"/>
-
 </beans>
