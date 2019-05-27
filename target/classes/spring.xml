@@ -64,7 +64,7 @@
         <property name="password" value="12345"/>
 
         <!-- 配置初始化大小、最小、最大 -->
-        <property name="initialSize" value="1" />
+        <property name="initialSize" value="5" />
         <property name="minIdle" value="1" />
         <property name="maxActive" value="20" />
 
@@ -85,7 +85,6 @@
           class="org.springframework.data.redis.connection.jedis.JedisConnectionFactory">
         <property name="poolConfig" ref="jedisPoolConfig" />
         <property name="port" value="${redis.port}" />
-        <property name="hostName" value="${redis.host}" />
         <property name="password" value="${redis.password}" />
         <property name="timeout" value="${redis.timeout}"></property>
     </bean>
