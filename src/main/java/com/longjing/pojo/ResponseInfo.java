@@ -5,7 +5,7 @@ package com.longjing.pojo;
  */
 public class ResponseInfo {
     private int code;
-    private String errInfo;
+    private String info;
 
     public int getCode() {
         return code;
@@ -15,19 +15,19 @@ public class ResponseInfo {
         this.code = code;
     }
 
-    public String getErrInfo() {
-        return errInfo;
+    public String getInfo() {
+        return info;
     }
 
-    public void setErrInfo(String errInfo) {
-        this.errInfo = errInfo;
+    public void setInfo(String info) {
+        this.info = info;
     }
 
     @Override
     public String toString() {
         return "ResponseInfo{" +
                 "code=" + code +
-                ", errInfo='" + errInfo + '\'' +
+                ", info='" + info + '\'' +
                 '}';
     }
 }

@@ -25,6 +25,7 @@ public class JedisClient {
     public void init() {
         jedisClient = this;
         jedisClient.redisTemplate = this.redisTemplate;
+        System.out.println("redis connection ok");
     }
 
     /**

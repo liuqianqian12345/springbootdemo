@@ -10,7 +10,7 @@ public class UserInfo {
     private String userName;//用户名
     private String password;//密码 md5加密大写
     private String sex;//性别
-    private String adress;//住址
+    private String address;//住址
 
     public String getId() {
         return id;
@@ -44,11 +44,11 @@ public class UserInfo {
         this.sex = sex;
     }
 
-    public String getAdress() {
-        return adress;
+    public String getAddress() {
+        return address;
     }
 
-    public void setAdress(String adress) {
-        this.adress = adress;
+    public void setAddress(String address) {
+        this.address = address;
     }
 }
