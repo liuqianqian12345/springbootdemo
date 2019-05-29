@@ -12,7 +12,7 @@ import java.util.Date;
 /**
  * Created by 18746 on 2019/5/27.
  */
-public class JwtUtils {
+public class JwtUtil {
     public static String createJWT(String id, String subject, long ttlMillis) {
         SignatureAlgorithm signatureAlgorithm = SignatureAlgorithm.HS256;
         long nowMillis = System.currentTimeMillis();

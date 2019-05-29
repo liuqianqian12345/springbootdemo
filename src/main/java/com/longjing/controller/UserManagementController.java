@@ -3,7 +3,7 @@ package com.longjing.controller;
 import com.longjing.pojo.LoginInfo;
 import com.longjing.pojo.ResponseInfo;
 import com.longjing.pojo.UserInfo;
-import com.longjing.service.ApplicationService;
+import com.longjing.service.UserManagementService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -12,9 +12,9 @@ import org.springframework.web.bind.annotation.*;
  */
 @RestController
 @RequestMapping("management")
-public class ApplicationController {
+public class UserManagementController {
     @Autowired
-    private ApplicationService applicationService;
+    private UserManagementService applicationService;
 
     @PostMapping(value = "login")
     public ResponseInfo login(@RequestBody LoginInfo loginInfo) {
@@ -25,5 +25,10 @@ public class ApplicationController {
     public ResponseInfo updateUser(@RequestBody UserInfo userInfo){
 
         return applicationService.updateUser(userInfo);
+    }
+
+    @PostMapping(value = "addUser")
+    public ResponseInfo addUser(@RequestBody UserInfo userInfo){
+        return null;
     }
 }

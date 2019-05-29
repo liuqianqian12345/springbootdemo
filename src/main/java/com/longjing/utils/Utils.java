@@ -6,7 +6,7 @@ import java.security.NoSuchAlgorithmException;
 /**
  * Created by 18746 on 2019/5/24.
  */
-public class Util {
+public class Utils {
     public static String md5(String str) {
         MessageDigest messageDigest= null;
         StringBuffer buffer = new StringBuffer();

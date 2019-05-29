@@ -1,9 +1,11 @@
 package com.longjing.pojo;
 
+import java.io.Serializable;
+
 /**
  * Created by 18746 on 2019/5/24.
  */
-public class LoginInfo {
+public class LoginInfo implements Serializable{
     private String userName;
     private String password;
 

@@ -1,11 +1,12 @@
 package com.longjing.pojo;
 
+import java.io.Serializable;
 import java.util.UUID;
 
 /**
  * Created by 18746 on 2019/5/24.
  */
-public class UserInfo {
+public class UserInfo implements Serializable{
     private String id;
     private String userName;//用户名
     private String password;//密码 md5加密大写

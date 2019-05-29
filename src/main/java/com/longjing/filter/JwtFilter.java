@@ -1,7 +1,7 @@
 package com.longjing.filter;
 
 import com.longjing.pojo.TokenCheckResult;
-import com.longjing.utils.JwtUtils;
+import com.longjing.utils.JwtUtil;
 import org.springframework.stereotype.Component;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.handler.HandlerInterceptorAdapter;
@@ -20,11 +20,12 @@ public class JwtFilter extends HandlerInterceptorAdapter {
         response.setHeader("Access-Control-Allow-Origin", "*");
         // 允许自定义请求头token(允许head跨域)
         response.setHeader("Access-Control-Allow-Headers", "token, Accept, Origin, X-Requested-With, Content-Type, Last-Modified");
+        //避免预请求干扰
         if("OPTIONS".equalsIgnoreCase(request.getMethod())) {
             return true;
         }
         String token = request.getHeader("Authorization");
-        TokenCheckResult result= JwtUtils.validateJWT(token);
+        TokenCheckResult result= JwtUtil.validateJWT(token);
         return result.isSuccess();
     }
 
