@@ -1,10 +1,9 @@
 package com.longjing.controller;
 
-import com.longjing.pojo.LoginInfo;
-import com.longjing.pojo.ResponseInfo;
-import com.longjing.pojo.UserInfo;
+import com.longjing.pojo.*;
 import com.longjing.service.UserManagementService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
 import org.springframework.web.bind.annotation.*;
 
 /**
@@ -29,6 +28,9 @@ public class UserManagementController {
 
     @PostMapping(value = "addUser")
     public ResponseInfo addUser(@RequestBody UserInfo userInfo){
-        return null;
+        return applicationService.addUser(userInfo);
     }
+
+    @PostMapping(value="findUser")
+    public PageResult<UserInfo> findUser(@RequestBody UserParam userParam, int pageSize, int num){return null;}
 }

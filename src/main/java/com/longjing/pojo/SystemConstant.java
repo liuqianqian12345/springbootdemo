@@ -10,5 +10,6 @@ public class SystemConstant {
     public static final int SUCCESS=10000;
     public static final int FAIL=99999;
     public static final int DATA_IS_NULL=10010;
+    public static final int USERNAME_HAS_EXIST=10011;
     public static final String JWT_SECERT="HFDJH7439864FB2397";
 }

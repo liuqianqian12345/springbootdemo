@@ -1,5 +1,6 @@
 package com.longjing.redis;
 
+import com.longjing.utils.SerializeUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.stereotype.Component;
@@ -15,7 +16,7 @@ import java.util.concurrent.TimeUnit;
 public class JedisClient {
 
     @Autowired
-    private RedisTemplate<String,Object> redisTemplate;
+    private RedisTemplate<String, Object> redisTemplate;
 
     // 维护一个本类的静态变量
     private static JedisClient jedisClient;
@@ -24,11 +25,12 @@ public class JedisClient {
     public void init() {
         jedisClient = this;
         jedisClient.redisTemplate = this.redisTemplate;
-        System.out.println("redis is ok");
+        System.out.println("redis is ok"+redisTemplate);
     }
 
     /**
      * 将参数中的字符串值设置为键的值，不设置过期时间
+     *
      * @param key
      * @param value 必须要实现 Serializable 接口
      */
@@ -38,8 +40,9 @@ public class JedisClient {
 
     /**
      * 将参数中的字符串值设置为键的值，设置过期时间
+     *
      * @param key
-     * @param value 必须要实现 Serializable 接口
+     * @param value   必须要实现 Serializable 接口
      * @param timeout
      */
     public static void set(String key, String value, Long timeout) {
@@ -48,6 +51,7 @@ public class JedisClient {
 
     /**
      * 获取与指定键相关的值
+     *
      * @param key
      * @return
      */
@@ -57,6 +61,7 @@ public class JedisClient {
 
     /**
      * 设置某个键的过期时间
+     *
      * @param key 键值
      * @param ttl 过期秒数
      */
@@ -66,6 +71,7 @@ public class JedisClient {
 
     /**
      * 判断某个键是否存在
+     *
      * @param key 键值
      */
     public static boolean hasKey(String key) {
@@ -74,6 +80,7 @@ public class JedisClient {
 
     /**
      * 向集合添加元素
+     *
      * @param key
      * @param value
      * @return 返回值为设置成功的value数
@@ -85,6 +92,7 @@ public class JedisClient {
 
     /**
      * 将给定分数的指定成员添加到键中存储的排序集合中
+     *
      * @param key
      * @param value
      * @param score
@@ -96,6 +104,7 @@ public class JedisClient {
 
     /**
      * 返回指定排序集中给定成员的分数
+     *
      * @param key
      * @param value
      * @return
@@ -106,6 +115,7 @@ public class JedisClient {
 
     /**
      * 删除指定的键
+     *
      * @param key
      * @return
      */
@@ -115,6 +125,7 @@ public class JedisClient {
 
     /**
      * 删除多个键
+     *
      * @param keys
      * @return
      */
@@ -124,12 +135,13 @@ public class JedisClient {
 
     /**
      * 向一张hash表中放入数据,如果不存在将创建
-     * @param key 键
-     * @param item 项
+     *
+     * @param key   键
+     * @param item  项
      * @param value 值
      * @return true 成功 false失败
      */
-    public static boolean hset(String key,String item,Object value) {
+    public static boolean hset(String key, String item, Object value) {
         try {
             jedisClient.redisTemplate.opsForHash().put(key, item, value);
             return true;
@@ -141,16 +153,17 @@ public class JedisClient {
 
     /**
      * 向一张hash表中放入数据,如果不存在将创建
-     * @param key 键
-     * @param item 项
+     *
+     * @param key   键
+     * @param item  项
      * @param value 值
-     * @param time 时间(秒)  注意:如果已存在的hash表有时间,这里将会替换原有的时间
+     * @param time  时间(秒)  注意:如果已存在的hash表有时间,这里将会替换原有的时间
      * @return true 成功 false失败
      */
-    public static boolean hset(String key,String item,Object value,long time) {
+    public static boolean hset(String key, String item, Object value, long time) {
         try {
             jedisClient.redisTemplate.opsForHash().put(key, item, value);
-            if(time>0){
+            if (time > 0) {
                 expire(key, time);
             }
             return true;
@@ -160,9 +173,20 @@ public class JedisClient {
         }
     }
 
-    public static boolean hasHash(String key,String hashKey){
-        return jedisClient.redisTemplate.opsForHash().hasKey(key,hashKey);
+    /**
+     * @param key  键
+     * @param item 项
+     */
+    public static boolean hasHash(String key, String item) {
+        return jedisClient.redisTemplate.opsForHash().hasKey(key, item);
     }
 
 
+    public static Object getObject(String key) {
+        return jedisClient.redisTemplate.opsForValue().get(key);
+    }
+
+    public static void setObject(String key, Object o) {
+        jedisClient.redisTemplate.opsForValue().set(key, o);
+    }
 }

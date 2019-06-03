@@ -1,7 +1,11 @@
 package com.longjing.utils;
 
+
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
 
 /**
  * Created by 18746 on 2019/5/24.
@@ -28,6 +32,19 @@ public class Utils {
         }
         // 标准的md5加密后的结果
         return buffer.toString().toUpperCase();
+    }
+
+    private static ThreadLocal<DateFormat> df=new ThreadLocal<DateFormat>(){
+        @Override
+        protected DateFormat initialValue() {
+            return new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+        }
+    };
+    public static String calender2Str(Calendar calendar){
+        if (null==calendar)return null;
+        SimpleDateFormat simpleDateFormat= (SimpleDateFormat) df.get();
+        String s=simpleDateFormat.format(calendar.getTime());
+        return s;
     }
 
 }

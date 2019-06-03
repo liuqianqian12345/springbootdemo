@@ -1,9 +1,10 @@
 package com.longjing;
 
-import com.longjing.pojo.LoginInfo;
-import com.longjing.pojo.ResponseInfo;
-import com.longjing.pojo.UserInfo;
+import com.longjing.pojo.*;
+import com.longjing.redis.JedisClient;
 import com.longjing.service.UserManagementService;
+import com.longjing.utils.SerializeUtil;
+import org.apache.catalina.User;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -33,5 +34,34 @@ public class UserManagementTest {
     public void updateUser(){
         UserInfo userInfo=new UserInfo();
         userManagementService.updateUser(userInfo);
+    }
+
+    @Test
+    public void jedisTest(){
+        UserInfo userInfo=new UserInfo();
+        userInfo.setUserName("zangs");
+        userInfo.setAddress("dasd");
+        JedisClient.setObject("name",userInfo);
+        Object o = JedisClient.getObject("name");
+        if (o instanceof UserInfo){
+            UserInfo userInfo1= (UserInfo) o;
+            System.out.println(userInfo1);
+        }
+    }
+
+    @Test
+    public void addUserTest(){
+        UserInfo userInfo=new UserInfo();
+        userInfo.setUserName("王五");
+        userInfo.setAddress("上海");
+        userInfo.setPassword("123456");
+        userManagementService.addUser(userInfo);
+    }
+
+    @Test
+    public void findUser(){
+        UserParam userParam=new UserParam();
+        PageResult pageResult=userManagementService.findUser(userParam,10,0);
+        System.out.println(pageResult.toString());
     }
 }

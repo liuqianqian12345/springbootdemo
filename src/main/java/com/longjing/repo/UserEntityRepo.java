@@ -11,5 +11,7 @@ import org.springframework.data.repository.PagingAndSortingRepository;
 public interface UserEntityRepo extends CrudRepository<UserEntity,String>,JpaSpecificationExecutor<UserEntity>,
         PagingAndSortingRepository<UserEntity,String> {
 
-    UserEntity findByUserNameAndPassword(String name,String password);
+    UserEntity findByUserNameAndPasswordAndStatus(String name,String password,String status);
+
+    UserEntity findByUserNameAndStatus(String name,String status);
 }
