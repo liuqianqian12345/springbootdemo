@@ -80,6 +80,7 @@ public class UserInfo implements Serializable{
                 ", sex='" + sex + '\'' +
                 ", address='" + address + '\'' +
                 ", status='" + status + '\'' +
+                ", createTime='" + createTime + '\'' +
                 '}';
     }
 
@@ -88,14 +89,15 @@ public class UserInfo implements Serializable{
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
 
-        UserInfo userInfo = (UserInfo) o;
+        UserInfo userInfo1 = (UserInfo) o;
 
-        if (id != null ? !id.equals(userInfo.id) : userInfo.id != null) return false;
-        if (userName != null ? !userName.equals(userInfo.userName) : userInfo.userName != null) return false;
-        if (password != null ? !password.equals(userInfo.password) : userInfo.password != null) return false;
-        if (sex != null ? !sex.equals(userInfo.sex) : userInfo.sex != null) return false;
-        if (address != null ? !address.equals(userInfo.address) : userInfo.address != null) return false;
-        return status != null ? status.equals(userInfo.status) : userInfo.status == null;
+        if (id != null ? !id.equals(userInfo1.id) : userInfo1.id != null) return false;
+        if (userName != null ? !userName.equals(userInfo1.userName) : userInfo1.userName != null) return false;
+        if (password != null ? !password.equals(userInfo1.password) : userInfo1.password != null) return false;
+        if (sex != null ? !sex.equals(userInfo1.sex) : userInfo1.sex != null) return false;
+        if (address != null ? !address.equals(userInfo1.address) : userInfo1.address != null) return false;
+        if (status != null ? !status.equals(userInfo1.status) : userInfo1.status != null) return false;
+        return createTime != null ? createTime.equals(userInfo1.createTime) : userInfo1.createTime == null;
     }
 
     @Override
@@ -106,6 +108,7 @@ public class UserInfo implements Serializable{
         result = 31 * result + (sex != null ? sex.hashCode() : 0);
         result = 31 * result + (address != null ? address.hashCode() : 0);
         result = 31 * result + (status != null ? status.hashCode() : 0);
+        result = 31 * result + (createTime != null ? createTime.hashCode() : 0);
         return result;
     }
 }

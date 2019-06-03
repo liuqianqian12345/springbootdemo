@@ -134,8 +134,8 @@ public class UserManagementService {
         return responseInfo;
     }
 
-    public PageResult<UserInfo> findUser(final UserParam userParam, int pageSize, int num){
-
+    public PageResult<UserInfo> findUser(com.longjing.pojo.PageRequest<UserParam> param){
+        final UserParam userParam=param.getParamContent();
         Specification spec=new Specification<UserEntity>() {
             @Override
             public Predicate toPredicate(Root root, CriteriaQuery criteriaQuery, CriteriaBuilder criteriaBuilder) {
@@ -152,7 +152,7 @@ public class UserManagementService {
             }
         };
         Sort sort=new Sort(Sort.Direction.DESC,"userName");
-        Pageable pageable=new PageRequest(num,pageSize,sort);
+        Pageable pageable=new PageRequest(param.getNum(),param.getSize(),sort);
         Page<UserEntity> page=userEntityRepo.findAll(spec,pageable);
         List<UserInfo> userInfos=new ArrayList<UserInfo>();
         List<UserEntity> userEntities=page.getContent();
@@ -167,7 +167,7 @@ public class UserManagementService {
         pageResult.setNum(page.getNumber());
         pageResult.setSize(page.getSize());
         pageResult.setTotal(page.getTotalElements());
-        pageResult.setTotalPages(pageResult.getTotalPages());
+        pageResult.setTotalPages(page.getTotalPages());
         return pageResult;
     }
 }

@@ -32,5 +32,5 @@ public class UserManagementController {
     }
 
     @PostMapping(value="findUser")
-    public PageResult<UserInfo> findUser(@RequestBody UserParam userParam, int pageSize, int num){return null;}
+    public PageResult<UserInfo> findUser(@RequestBody PageRequest<UserParam> param){return applicationService.findUser(param);}
 }
